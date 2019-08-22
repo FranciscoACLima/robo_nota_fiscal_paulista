@@ -29,8 +29,22 @@ class Nfp(Tela):
         """
         self.codigo = codigo
         self.mesRef = 0
-        self.aplicativo = aplicativo
-        self.aplicativoCmd = aplicativo_cmd
+
+    @property
+    def codigo(self):
+        return self._codigo
+
+    @codigo.setter
+    def codigo(self, codigo):
+        if len(codigo) == 44:
+            self._codigo = codigo
+            return
+        pos = codigo.find('3519')
+        if pos < 0:
+            self._codigo = ''
+            return
+        codigo = codigo[pos: pos + 44]
+        self._codigo = codigo
 
     @property
     def mesAtual(self):

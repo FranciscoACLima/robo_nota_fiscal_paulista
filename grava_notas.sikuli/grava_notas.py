@@ -5,8 +5,11 @@ Cadastra notas para a instituição CREN
 
 Autor: Francisco A C Lima (faclsp@gmail.com)
 """
+from sikuli import *
 from configuracoes import *
 from planilha import Planilha
+# import nfp
+# reload(nfp)
 from nfp import Nfp
 
 
@@ -64,7 +67,10 @@ def get_dia_atual():
 def definir_mes():
     titulo = 'Gravar Nota Fiscal Paulista'
     texto = 'Escolha o mês de referência das notas'
-    ult_opcao = Sikulix.prefLoad('ult_opcao', '')
+    try:
+        ult_opcao = Sikulix.prefLoad('ult_opcao', '')
+    except Exception:
+        ult_opcao = ''
     opcoes = (
         'Notas do mês anterior'.decode('utf-8'),
         'Notas deste mês'.decode('utf-8'),
@@ -87,7 +93,7 @@ def definir_mes():
         confirm = popAsk(msg.decode('utf-8'))
         if not confirm:
             exit(1)
-    Sikulix.prefStore('ult_opcao', selecionado)
+    # Sikulix.prefStore('ult_opcao', selecionado)
     return opcao
 
 
